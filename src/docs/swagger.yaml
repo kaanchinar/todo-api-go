@@ -1,0 +1,16 @@
+basePath: /
+host: localhost:8080
+info:
+  contact: {}
+  description: A full-featured Todo application with JWT auth, Redis caching, and
+    Prometheus metrics.
+  title: Todo App API
+  version: 1.0.0
+paths: {}
+securityDefinitions:
+  BearerAuth:
+    description: Type "Bearer" followed by a space and your JWT token.
+    in: header
+    name: Authorization
+    type: apiKey
+swagger: "2.0"
