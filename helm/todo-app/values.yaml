@@ -72,3 +72,33 @@ readinessProbe:
 nodeSelector: {}
 tolerations: []
 affinity: {}
+
+# PostgreSQL
+postgresql:
+  username: postgres
+  password: postgres
+  database: todoapp
+  persistence:
+    enabled: false
+    size: 1Gi
+  resources:
+    limits:
+      cpu: 500m
+      memory: 512Mi
+    requests:
+      cpu: 100m
+      memory: 128Mi
+
+# Redis
+redis:
+  password: ""
+  persistence:
+    enabled: false
+    size: 1Gi
+  resources:
+    limits:
+      cpu: 200m
+      memory: 256Mi
+    requests:
+      cpu: 100m
+      memory: 64Mi

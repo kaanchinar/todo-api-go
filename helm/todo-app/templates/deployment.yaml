@@ -32,6 +32,19 @@ spec:
       securityContext:
         {{- toYaml . | nindent 8 }}
       {{- end }}
+      initContainers:
+        - name: wait-for-db
+          image: curlimages/curl:latest
+          command:
+            - sh
+            - -c
+            - |
+              echo "Waiting for PostgreSQL..."
+              until nc -z {{ include "todo-app.fullname" . }}-postgres 5432 > /dev/null 2>&1; do
+                echo "PostgreSQL is unavailable - sleeping"
+                sleep 5
+              done
+              echo "PostgreSQL is up!"
       containers:
         - name: {{ .Chart.Name }}
           {{- with .Values.securityContext }}
@@ -40,6 +53,15 @@ spec:
           {{- end }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
+            - name: DATABASE_URL
+              value: {{ printf "postgres://%s:%s@%s-postgres:5432/%s?sslmode=disable" .Values.postgresql.username .Values.postgresql.password (include "todo-app.fullname" .) .Values.postgresql.database | quote }}
+            - name: REDIS_ADDR
+              value: {{ printf "%s-redis:6379" (include "todo-app.fullname" .) }}
+            - name: REDIS_PASS
+              value: {{ .Values.redis.password | quote }}
+            - name: JWT_SECRET
+              value: "super-secret-key-change-in-production"
           ports:
             - name: http
               containerPort: {{ .Values.service.targetPort }}
