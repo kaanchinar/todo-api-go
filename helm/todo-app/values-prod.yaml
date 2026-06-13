@@ -3,7 +3,7 @@
 replicaCount: 3
 
 image:
-  tag: "latest"
+  tag: "sha-9e23d1f"
 
 httpRoute:
   enabled: true
