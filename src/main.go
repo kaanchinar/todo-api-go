@@ -29,7 +29,7 @@ import (
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 
 
-	_ "github.com/kaanchinar/todo-app/docs"
+	"github.com/kaanchinar/todo-app/docs"
 )
 
 func main() {
@@ -65,7 +65,8 @@ func main() {
 		w.Write([]byte(scalarHTML))
 	})
 	r.Get("/docs/openapi.json", func(w http.ResponseWriter, r *http.Request) {
-		http.ServeFile(w, r, "docs/swagger.json")
+		w.Header().Set("Content-Type", "application/json")
+		w.Write(docs.GetSwaggerJSON())
 	})
 
 	// Auth routes
@@ -121,7 +122,14 @@ const scalarHTML = `<!DOCTYPE html>
     </style>
 </head>
 <body>
-    <script id="api-reference" data-url="/docs/openapi.json"></script>
+    <script id="api-reference"></script>
     <script src="https://cdn.jsdelivr.net/npm/@scalar/api-reference"></script>
+    <script>
+        document.getElementById('api-reference').configure({
+            spec: {
+                url: '/docs/openapi.json'
+            }
+        });
+    </script>
 </body>
 </html>`

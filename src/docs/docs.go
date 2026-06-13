@@ -26,7 +26,7 @@ const docTemplate = `{
 }`
 
 // SwaggerInfo holds exported Swagger Info so clients can modify it
-var SwaggerInfo = &swag.Spec{
+var SwaggerInfo *swag.Spec = &swag.Spec{
 	Version:          "1.0.0",
 	Host:             "localhost:8080",
 	BasePath:         "/",
@@ -39,4 +39,9 @@ var SwaggerInfo = &swag.Spec{
 
 func init() {
 	swag.Register(SwaggerInfo.InstanceName(), SwaggerInfo)
+}
+
+// GetSwaggerJSON returns the populated OpenAPI spec as JSON bytes.
+func GetSwaggerJSON() []byte {
+	return []byte(SwaggerInfo.ReadDoc())
 }

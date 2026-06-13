@@ -1,0 +1,20 @@
+# Production environment overrides
+
+replicaCount: 3
+
+image:
+  tag: "latest"
+
+httpRoute:
+  enabled: true
+  hostnames:
+    - todo.local
+
+hpa:
+  enabled: true
+  minReplicas: 3
+  maxReplicas: 10
+  targetCPUUtilizationPercentage: 70
+
+serviceMonitor:
+  enabled: true

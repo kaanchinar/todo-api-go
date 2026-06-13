@@ -1,0 +1,17 @@
+# Dev environment overrides
+
+replicaCount: 1
+
+image:
+  tag: "latest"
+
+httpRoute:
+  enabled: true
+  hostnames:
+    - todo-dev.local
+
+hpa:
+  enabled: false
+
+serviceMonitor:
+  enabled: false
