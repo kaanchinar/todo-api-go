@@ -15,3 +15,31 @@ hpa:
 
 serviceMonitor:
   enabled: false
+
+# PostgreSQL - dev settings (no persistence)
+postgresql:
+  username: postgres
+  password: postgres
+  database: todoapp
+  persistence:
+    enabled: false
+  resources:
+    limits:
+      cpu: 500m
+      memory: 512Mi
+    requests:
+      cpu: 100m
+      memory: 128Mi
+
+# Redis - dev settings (no persistence)
+redis:
+  password: ""
+  persistence:
+    enabled: false
+  resources:
+    limits:
+      cpu: 200m
+      memory: 256Mi
+    requests:
+      cpu: 100m
+      memory: 64Mi

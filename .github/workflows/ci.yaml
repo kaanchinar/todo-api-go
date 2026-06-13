@@ -73,13 +73,12 @@ jobs:
       - name: Update image tag
         run: |
           SHA="${{ github.sha }}"
-          SHORT_SHA="${SHA:0:7}"
-          sed -i "s/^  tag: \"latest\"/  tag: \"sha-${SHORT_SHA}\"/" ${{ env.HELM_CHART_PATH }}/values-prod.yaml
+          sed -i "s/^  tag: \".*\"/  tag: \"sha-$SHA\"/" ${{ env.HELM_CHART_PATH }}/values-prod.yaml
 
       - name: Commit and push
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add ${{ env.HELM_CHART_PATH }}/values-prod.yaml
-          git commit -m "[skip ci] update prod image tag to sha-${GITHUB_SHA::7}" || echo "No changes to commit"
+          git commit -m "[skip ci] update prod image tag to sha-${GITHUB_SHA}" || echo "No changes to commit"
           git push
