@@ -69,6 +69,8 @@ spec:
   volumeClaimTemplates:
     - metadata:
         name: redis-data
+        annotations:
+          argocd.argoproj.io/health-options: Ignore
       spec:
         accessModes: ["ReadWriteOnce"]
         resources:
