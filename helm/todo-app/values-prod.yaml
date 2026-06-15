@@ -3,7 +3,7 @@
 replicaCount: 3
 
 image:
-  tag: "sha-8457c8baeb1235e50776c2442efb3402f6e73f9b"
+  tag: "sha-affa2277010c7e4130d6165975bc939d20a5a5e2-ndaskjfhsajkh"
 
 httpRoute:
   enabled: true
