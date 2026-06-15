@@ -1,0 +1,36 @@
+apiVersion: monitoring.coreos.com/v1alpha1
+kind: AlertmanagerConfig
+metadata:
+  name: discord-notifications
+  namespace: monitoring
+  labels:
+    release: monitoring
+spec:
+  route:
+    receiver: discord
+    groupBy:
+      - alertname
+      - severity
+    groupWait: 30s
+    groupInterval: 5m
+    repeatInterval: 12h
+  receivers:
+    - name: discord
+      discordConfigs:
+        - apiURL:
+            name: discord-webhook-secret
+            key: url
+          title: |
+            {{ range .Alerts }}
+            [{{ .Status | toUpper }}] {{ .Annotations.summary }}
+            {{ end }}
+          message: |
+            {{ range .Alerts }}
+            **Alert:** {{ .Annotations.summary }}{{ if .Labels.severity }} - `{{ .Labels.severity }}`{{ end }}
+            **Description:** {{ .Annotations.description }}
+            **Details:**
+            {{ range .Labels.SortedPairs }}
+            - {{ .Name }}: {{ .Value }}
+            {{ end }}
+            ---
+            {{ end }}
