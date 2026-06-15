@@ -3,7 +3,7 @@
 replicaCount: 1
 
 image:
-  repository: ghcr.io/kaanchinar/todo-api-go-not-valid
+  repository: ghcr.io/kaanchinar/todo-api-go
   pullPolicy: IfNotPresent
   tag: "latest"
 
