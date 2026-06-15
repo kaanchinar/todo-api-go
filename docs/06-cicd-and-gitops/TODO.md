@@ -7,7 +7,7 @@
 6. Add the pipeline status badge to the `README.md` file.
 7. Install ArgoCD into the Kubernetes cluster.
 8. Log in to the ArgoCD UI and change the default admin password.
-9. Write the `argocd/apps/dev-app.yaml` manifest — `source: helm/gopher`, `valueFiles: [values.yaml, values-dev.yaml]`, `namespace: gopher-dev`, `syncPolicy: automated + selfHeal + prune`.
-10. Write the `argocd/apps/prod-app.yaml` manifest — with the same structure, but using `values-prod.yaml` and `namespace: gopher-prod`.
+9. Write the `argocd/apps/dev-app.yaml` manifest — `source: helm/todo-app`, `valueFiles: [values.yaml, values-dev.yaml]`, `namespace: todo-dev`, `syncPolicy: automated + selfHeal + prune`.
+10. Write the `argocd/apps/prod-app.yaml` manifest — with the same structure, but using `values-prod.yaml` and `namespace: todo-prod`.
 11. Write the `argocd/root-app.yaml` manifest (App-of-Apps pattern) and target the `argocd/apps/` directory.
 12. Execute only the `kubectl apply -f argocd/root-app.yaml` command in the cluster; leave the management of all other resources to ArgoCD.

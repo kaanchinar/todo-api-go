@@ -12,7 +12,7 @@ spec:
       - alertname
       - severity
     groupWait: 30s
-    groupInterval: 5m
+    groupInterval: 3m
     repeatInterval: 12h
   receivers:
     - name: discord

@@ -8,7 +8,7 @@ Verification of the project's structural integrity, security rules, and document
 ## Task steps
 1. Verify that the repository structure is exactly as follows:
    ├── app/
-   ├── helm/gopher/
+   ├── helm/todo-app/
    ├── argocd/
    └── .github/workflows/
 2. Ensure that the steps for setting up and running the project from scratch are fully and clearly written in the `README.md` file.

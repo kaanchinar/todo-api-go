@@ -29,18 +29,18 @@ spec:
             histogram_quantile(0.99,
               sum(rate(http_request_duration_seconds_bucket[5m])) by (le)
             ) > 0.5
-          for: 5m
+          for: 2m
           labels:
             severity: warning
             namespace: monitoring
           annotations:
             summary: "High P99 latency detected"
-            description: "P99 latency is {{ $value }}s for the last 5 minutes"
+            description: "P99 latency is {{ $value }}s for the last 2 minutes"
 
         - alert: PodCrashLooping
           expr: |
             rate(kube_pod_container_status_restarts_total[5m]) > 0
-          for: 5m
+          for: 2m
           labels:
             severity: critical
             namespace: monitoring
