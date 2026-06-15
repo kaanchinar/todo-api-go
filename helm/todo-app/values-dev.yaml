@@ -19,7 +19,7 @@ serviceMonitor:
 # PostgreSQL - dev settings (no persistence)
 postgresql:
   username: postgres
-  password: postgres
+  password: "" # Set via --set or secrets
   database: todoapp
   persistence:
     enabled: false

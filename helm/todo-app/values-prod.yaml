@@ -22,7 +22,7 @@ serviceMonitor:
 # PostgreSQL - production settings
 postgresql:
   username: postgres
-  password: "prodpassword123"  # Set via --set or secrets
+  password: ""  # Set via --set or secrets
   database: todoapp
   persistence:
     enabled: true
